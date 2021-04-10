@@ -24,11 +24,11 @@ The goal of the game is to save the parachutists from falling into the water by 
 
 ● You can move the boat using the keyboard arrow buttons.
 <br />
-● If the user catches a parachutist, s/he gets 10 points.
+● If you catche a parachutist, you get 10 points.
 <br />
-● If a parachutist falls to the water, the user loses 1 live point (starting from 3). 
+● If a parachutist falls to the water, you lose 1 live point (starting from 3). 
 <br />
-● If the user loses all life points the game ends.
+● If you lose all life points, the game ends.
 <br />
 <br />
 <br />

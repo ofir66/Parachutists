@@ -17,7 +17,7 @@
 
 In our game there is an airplane flying above the sea and dropping parachutists from time to time.
 <br />
-In the water there is a boat awaiting the parachutes.
+In the water there is a boat awaiting the parachutists.
 <br />
 The goal of the game is to save the parachutists from falling into the water by moving the boat left and right.
 

@@ -23,22 +23,18 @@ public abstract class ParachutistsItem implements GameItem<Integer> {
 		return img; 
 	}
 	
-	@Override	
 	public Integer getPosX() {
 		return posX;
 	}
-
-	@Override	
+	
 	public void setPosX(Integer posX) {	
 		this.posX = posX;
 	}
 
-	@Override	
 	public Integer getPosY() {	
 		return posY;
 	}
-
-	@Override	
+	
 	public void setPosY(Integer posY) {	
 		this.posY = posY;
 	}

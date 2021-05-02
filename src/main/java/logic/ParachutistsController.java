@@ -143,10 +143,9 @@ public class ParachutistsController extends JPanel implements GameController {
 	
 	private void enableKeyListener() {
 		this.addKeyListener(new KeyListener() {
-			@Override
+			
 			public void keyTyped(KeyEvent e) {}
 
-			@Override
 			public void keyPressed(KeyEvent e) {
 				switch(e.getKeyCode()) {
 					case KeyEvent.VK_LEFT:
@@ -170,7 +169,6 @@ public class ParachutistsController extends JPanel implements GameController {
 				}
 			}
 
-			@Override
 			public void keyReleased(KeyEvent e) {}
 		});
 	}
@@ -184,7 +182,6 @@ public class ParachutistsController extends JPanel implements GameController {
 	
 	private void enableActionListener() {
 		timer.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (isPlaying){
 					boolean isParachutistVisible = parachutist.getIsVisible();
@@ -229,13 +226,11 @@ public class ParachutistsController extends JPanel implements GameController {
 		timer.start();
 	}
 
-	@Override
 	public void startGame() {
 		this.enableKeyListener();
 		this.enableActionListener();
 	}
 
-	@Override
 	public void restartGame() {
 		gameStats.setScore(0);
 		gameStats.setLives(StatsConsts.INITIAL_LIVES);
@@ -249,7 +244,6 @@ public class ParachutistsController extends JPanel implements GameController {
 		repaint();
 	}
 
-	@Override
 	public void endGame() {
 		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
 		frame.dispose();

@@ -17,14 +17,14 @@ public class ImageParser {
 	}
 	
 	Map<Integer, BufferedImage> createImagesMap() {
-		Map<Integer, BufferedImage> imagesMap = new HashMap<>();
-		
+		Map<Integer, BufferedImage> imagesMap = new HashMap<Integer, BufferedImage>();
+		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		try {
-			imagesMap.put(IdConsts.BACKGROUND, ImageIO.read(new File("resources/background.png")));
-			imagesMap.put(IdConsts.BOAT, ImageIO.read(new File("resources/boat.png")));
-			imagesMap.put(IdConsts.PARACHUTIST, ImageIO.read(new File("resources/parachutist.png")));
-			imagesMap.put(IdConsts.PLANE, ImageIO.read(new File("resources/plane.png")));
-			imagesMap.put(IdConsts.SEA, ImageIO.read(new File("resources/sea.png")));
+			imagesMap.put(IdConsts.BACKGROUND, ImageIO.read(new File("src/main/resources/background.png")));
+			imagesMap.put(IdConsts.BOAT, ImageIO.read(new File("src/main/resources/boat.png")));
+			imagesMap.put(IdConsts.PARACHUTIST, ImageIO.read(new File("src/main/resources/parachutist.png")));
+			imagesMap.put(IdConsts.PLANE, ImageIO.read(new File("src/main/resources/plane.png")));
+			imagesMap.put(IdConsts.SEA, ImageIO.read(new File("src/main/resources/sea.png")));
 		} catch (IOException e) {
 			System.out.println("Wrong path was given for the image.\n"
 												+ "Verify current working directory and "

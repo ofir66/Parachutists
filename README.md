@@ -2,12 +2,11 @@
 
 <br />
 
-1. Make sure Eclipse (for Java) is installed at your computer.
-2. Open Eclipse.
-3. Click on `File` -> `Import` -> `General` -> `Existing Projects into Workspace` -> `Next`.
-4. Select the root directory to be this git project.
-5. Click on `Finish`.
-6. For starting the game: run the class `ParachutistsRunner.java` under the package `setup`.
+1. Make sure that Maven is installed on your computer.
+2. Open command line.
+3. Enter the `Parachutists` folder from the command line.
+4. Run the following command for compiling the game: `mvn compile`
+5. Run the following command for running the game: `mvn exec:java`
 
 <br />
 

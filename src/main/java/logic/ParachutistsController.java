@@ -247,5 +247,6 @@ public class ParachutistsController extends JPanel implements GameController {
 	public void endGame() {
 		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
 		frame.dispose();
+		System.exit(0);
 	}
 }

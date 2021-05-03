@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.util.Map;
 
 import javax.swing.Timer;
 
@@ -19,11 +17,11 @@ import data.Boat;
 import data.GameStats;
 import data.Parachutist;
 import data.ParachutistsItem;
+import data.ParachutistsModel;
 import data.Plane;
 import data.Sea;
 import gameInterface.GameController;
 import globalConstants.FontConsts;
-import globalConstants.IdConsts;
 import globalConstants.SizeConsts;
 import globalConstants.SpeedConsts;
 import globalConstants.StatsConsts;
@@ -34,35 +32,28 @@ import javax.swing.SwingUtilities;
 
 public class ParachutistsController extends JPanel implements GameController {
 	
+	private final ParachutistsModel model;
 	private boolean isPlaying; 
-	private GameStats gameStats;
 	private Timer timer;
-	private Background background;
-	private Boat boat;
-	private Parachutist parachutist;
-	private Plane plane;
-	private Sea sea;
 	
 	
-	public ParachutistsController(Map<Integer, BufferedImage> imagesMap) {
+	public ParachutistsController(ParachutistsModel model) {
 		setFocusable(true);
 		
-		gameStats = new GameStats(StatsConsts.INITIAL_SCORE, StatsConsts.INITIAL_LIVES);
-		background = new Background(imagesMap.get(IdConsts.BACKGROUND));
-		boat = new Boat(SizeConsts.BOAT_X, SizeConsts.BOAT_Y, SizeConsts.BOAT_WIDTH, SizeConsts.BOAT_HEIGHT,
-										imagesMap.get(IdConsts.BOAT));
-		parachutist = new Parachutist(SizeConsts.PARACHUTE_X, SizeConsts.PARACHUTE_Y, 
-				SizeConsts.PARACHUTE_WIDTH, SizeConsts.PARACHUTE_HEIGHT, imagesMap.get(IdConsts.PARACHUTIST));
-		plane = new Plane(SizeConsts.PLANE_X, SizeConsts.PLANE_Y, 
-				SizeConsts.PLANE_WIDTH, SizeConsts.PLANE_HEIGHT, imagesMap.get(IdConsts.PLANE));
-		sea = new Sea(SizeConsts.SEA_X, SizeConsts.SEA_Y, SizeConsts.SEA_WIDTH, 
-				SizeConsts.SEA_HEIGHT, imagesMap.get(IdConsts.SEA));
+		this.model = model;
 		isPlaying = true;
 		timer = new Timer(SpeedConsts.TIMER_DELAY, null);
 		startGame();
 	}
 
 	public void paint(Graphics g) {
+		GameStats gameStats = this.model.getGameStats();
+		Background background = this.model.getBackground();
+		Sea sea = this.model.getSea();
+		Boat boat = this.model.getBoat();
+		Plane plane = this.model.getPlane();
+		Parachutist parachutist = this.model.getParachutist();
+		
 		// draw backGround
 		g.drawImage(background.getImg(), 0, 0, null);
 
@@ -119,18 +110,24 @@ public class ParachutistsController extends JPanel implements GameController {
 	}
 	
 	private void moveBoatRight() {
+		Boat boat = this.model.getBoat();
+		
 		if (boat.getPosX() < SizeConsts.BOAT_RIGHT_LIMIT) {
 			boat.setPosX(boat.getPosX() + SizeConsts.BOAT_STEP_SIZE);
 		}
 	}
 	
 	private void moveBoatLeft() {
+		Boat boat = this.model.getBoat();
+		
 		if (boat.getPosX() > SizeConsts.BOAT_LEFT_LIMIT) {
 			boat.setPosX(boat.getPosX()- SizeConsts.BOAT_STEP_SIZE);
 		}
 	}
 	
 	private void movePlane() {
+		Plane plane = this.model.getPlane();
+		
 		plane.setPosX(plane.getPosX() - SpeedConsts.PLANE_SPEED);
 		if(plane.getPosX() <= 0) {
 			plane.setPosX(SizeConsts.PLANE_RIGHT_LIMIT);
@@ -138,6 +135,8 @@ public class ParachutistsController extends JPanel implements GameController {
 	}
 	
 	private void moveParachute() {
+		Parachutist parachutist = this.model.getParachutist();
+		
 		parachutist.setPosY(parachutist.getPosY() + SpeedConsts.PARACHUTE_SPEED);
 	}
 	
@@ -147,6 +146,8 @@ public class ParachutistsController extends JPanel implements GameController {
 			public void keyTyped(KeyEvent e) {}
 
 			public void keyPressed(KeyEvent e) {
+				Boat boat = model.getBoat();
+				
 				switch(e.getKeyCode()) {
 					case KeyEvent.VK_LEFT:
 						if (boat.getIsVisible()) {
@@ -183,6 +184,13 @@ public class ParachutistsController extends JPanel implements GameController {
 	private void enableActionListener() {
 		timer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Parachutist parachutist = model.getParachutist();
+				Boat boat = model.getBoat();
+				Plane plane = model.getPlane();
+				GameStats gameStats = model.getGameStats();
+				Sea sea = model.getSea();
+				
+				
 				if (isPlaying){
 					boolean isParachutistVisible = parachutist.getIsVisible();
 					
@@ -232,6 +240,10 @@ public class ParachutistsController extends JPanel implements GameController {
 	}
 
 	public void restartGame() {
+		Boat boat = model.getBoat();
+		Plane plane = model.getPlane();
+		GameStats gameStats = model.getGameStats();
+		
 		gameStats.setScore(0);
 		gameStats.setLives(StatsConsts.INITIAL_LIVES);
 		boat.setPosX(SizeConsts.BOAT_X);

@@ -20,7 +20,7 @@ public class ImageParser {
 	 * @param imageId - the id of the image resource.
 	 * @return true if insertion succeed and false otherwise.
 	 */
-	public boolean insertImage(Map<Integer, BufferedImage> imagesMap, String imageName, int imageId) {
+	private boolean insertImage(Map<Integer, BufferedImage> imagesMap, String imageName, int imageId) {
 		boolean wasInserted = false;
 		
 		try {

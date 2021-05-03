@@ -19,6 +19,10 @@ public class ParachutistsRunner {
 		ImageParser imgParser = new ImageParser();
 		Map<Integer, BufferedImage> imagesMap = imgParser.createImagesMap();
 		
+		if (imagesMap == null) {
+			return;
+		}
+		
 		// run the game
 		gamePlay = new ParachutistsController(imagesMap);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

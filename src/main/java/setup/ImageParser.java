@@ -31,6 +31,7 @@ public class ImageParser {
 												+ "edit the path to lead for 'resources' folder.\n"
 												+ "Current working directory: " + System.getProperty("user.dir"));
 			e.printStackTrace();
+			return null;
 		}
 		
 		return imagesMap;

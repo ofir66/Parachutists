@@ -12,28 +12,37 @@ import globalConstants.IdConsts;
 
 public class ImageParser {
 	
-	public ImageParser() {
+	public boolean insertImage(Map<Integer, BufferedImage> imagesMap, String imageName, int imageId) {
+		boolean wasInserted = false;
 		
+		try {
+			imagesMap.put(imageId, ImageIO.read(new File(ResourcesConsts.PATH + imageName)));
+			wasInserted = true;
+		}
+		catch (IOException e) {
+			System.err.println("Image " + imageName + " wasn't found.\n"
+					+ "Verify current working directory and "
+					+ "the path leading for 'resources' folder.\n"
+					+ "Current working directory: " + System.getProperty("user.dir"));
+			e.printStackTrace();
+		}
+		
+		return wasInserted;
 	}
 	
 	Map<Integer, BufferedImage> createImagesMap() {
 		Map<Integer, BufferedImage> imagesMap = new HashMap<Integer, BufferedImage>();
-		System.out.println("Working Directory = " + System.getProperty("user.dir"));
-		try {
-			imagesMap.put(IdConsts.BACKGROUND, ImageIO.read(new File(ResourcesConsts.PATH + "background.png")));
-			imagesMap.put(IdConsts.BOAT, ImageIO.read(new File(ResourcesConsts.PATH + "boat.png")));
-			imagesMap.put(IdConsts.PARACHUTIST, ImageIO.read(new File(ResourcesConsts.PATH + "parachutist.png")));
-			imagesMap.put(IdConsts.PLANE, ImageIO.read(new File(ResourcesConsts.PATH + "plane.png")));
-			imagesMap.put(IdConsts.SEA, ImageIO.read(new File(ResourcesConsts.PATH + "sea.png")));
-		} catch (IOException e) {
-			System.out.println("Wrong path was given for the image.\n"
-												+ "Verify current working directory and "
-												+ "edit the path to lead for 'resources' folder.\n"
-												+ "Current working directory: " + System.getProperty("user.dir"));
-			e.printStackTrace();
-			return null;
+		boolean wasBackgroundInserted = this.insertImage(imagesMap, "background.png", IdConsts.BACKGROUND);
+		boolean wasBoatInserted = this.insertImage(imagesMap, "boat.png", IdConsts.BOAT);
+		boolean wasParachutistInserted = this.insertImage(imagesMap, "parachutist.png", IdConsts.PARACHUTIST);
+		boolean wasPlaneInserted = this.insertImage(imagesMap, "plane.png", IdConsts.PLANE);
+		boolean wasSeaInserted = this.insertImage(imagesMap, "sea.png", IdConsts.SEA);
+		
+		if (wasBackgroundInserted && wasBoatInserted && wasParachutistInserted && wasPlaneInserted && wasSeaInserted) {
+			return imagesMap;
 		}
 		
-		return imagesMap;
+		return null;
+		
 	}
 }

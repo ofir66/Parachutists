@@ -14,11 +14,6 @@ import java.util.Map;
 
 import javax.swing.Timer;
 
-import constants.FontConsts;
-import constants.IdConsts;
-import constants.SizeConsts;
-import constants.SpeedConsts;
-import constants.StatsConsts;
 import data.Background;
 import data.Boat;
 import data.GameStats;
@@ -27,6 +22,11 @@ import data.ParachutistsItem;
 import data.Plane;
 import data.Sea;
 import gameInterface.GameController;
+import globalConstants.FontConsts;
+import globalConstants.IdConsts;
+import globalConstants.SizeConsts;
+import globalConstants.SpeedConsts;
+import globalConstants.StatsConsts;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

@@ -1,4 +1,4 @@
-package constants;
+package globalConstants;
 
 import java.util.Random;
 

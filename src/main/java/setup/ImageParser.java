@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
-import constants.IdConsts;
+import globalConstants.IdConsts;
 
 public class ImageParser {
 	
@@ -20,11 +20,11 @@ public class ImageParser {
 		Map<Integer, BufferedImage> imagesMap = new HashMap<Integer, BufferedImage>();
 		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		try {
-			imagesMap.put(IdConsts.BACKGROUND, ImageIO.read(new File("src/main/resources/background.png")));
-			imagesMap.put(IdConsts.BOAT, ImageIO.read(new File("src/main/resources/boat.png")));
-			imagesMap.put(IdConsts.PARACHUTIST, ImageIO.read(new File("src/main/resources/parachutist.png")));
-			imagesMap.put(IdConsts.PLANE, ImageIO.read(new File("src/main/resources/plane.png")));
-			imagesMap.put(IdConsts.SEA, ImageIO.read(new File("src/main/resources/sea.png")));
+			imagesMap.put(IdConsts.BACKGROUND, ImageIO.read(new File(ResourcesConsts.PATH + "background.png")));
+			imagesMap.put(IdConsts.BOAT, ImageIO.read(new File(ResourcesConsts.PATH + "boat.png")));
+			imagesMap.put(IdConsts.PARACHUTIST, ImageIO.read(new File(ResourcesConsts.PATH + "parachutist.png")));
+			imagesMap.put(IdConsts.PLANE, ImageIO.read(new File(ResourcesConsts.PATH + "plane.png")));
+			imagesMap.put(IdConsts.SEA, ImageIO.read(new File(ResourcesConsts.PATH + "sea.png")));
 		} catch (IOException e) {
 			System.out.println("Wrong path was given for the image.\n"
 												+ "Verify current working directory and "

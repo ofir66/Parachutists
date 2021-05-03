@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import constants.SizeConsts;
+import globalConstants.SizeConsts;
 import logic.ParachutistsController;
 
 

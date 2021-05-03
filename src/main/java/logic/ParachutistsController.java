@@ -32,7 +32,7 @@ public class ParachutistsController extends JPanel implements GameController {
 	
 	private final ParachutistsModel model;
 	private boolean isPlaying; 
-	private Timer timer;
+	private final Timer timer;
 	private final ParachutistsAlgHandler parachutistsAlgHandler;
 	
 	

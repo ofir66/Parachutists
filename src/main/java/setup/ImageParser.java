@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import globalConstants.IdConsts;
+import view.ParachutistsDisplay;
 
 public class ImageParser {
 	
@@ -20,7 +21,7 @@ public class ImageParser {
 			wasInserted = true;
 		}
 		catch (IOException e) {
-			System.err.println("Image " + imageName + " wasn't found.\n"
+			ParachutistsDisplay.printToStderr("Image " + imageName + " wasn't found.\n"
 					+ "Verify current working directory and "
 					+ "the path leading for 'resources' folder.\n"
 					+ "Current working directory: " + System.getProperty("user.dir"));

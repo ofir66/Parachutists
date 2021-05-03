@@ -34,7 +34,7 @@ import javax.swing.SwingUtilities;
 
 public class ParachutistsController extends JPanel implements GameController {
 	
-	private boolean isPlaying = false; 
+	private boolean isPlaying; 
 	private GameStats gameStats;
 	private Timer timer;
 	private Background background;

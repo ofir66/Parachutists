@@ -1,4 +1,4 @@
-package logic;
+package control;
 
 import java.awt.Rectangle;
 

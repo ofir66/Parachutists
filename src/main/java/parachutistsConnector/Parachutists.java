@@ -3,6 +3,7 @@ package parachutistsConnector;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import control.ParachutistsController;
 import data.Background;
 import data.Boat;
 import data.GameStats;
@@ -11,7 +12,6 @@ import data.ParachutistsModel;
 import data.Plane;
 import data.Sea;
 import globalConstants.SizeConsts;
-import logic.ParachutistsController;
 
 public class Parachutists {
 

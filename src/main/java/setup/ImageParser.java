@@ -13,6 +13,13 @@ import view.ParachutistsDisplay;
 
 public class ImageParser {
 	
+	/**
+	 * Inserts an image resource into a given images map.
+	 * @param imagesMap - the images map.
+	 * @param imageName - the name of the image resource.
+	 * @param imageId - the id of the image resource.
+	 * @return true if insertion succeed and false otherwise.
+	 */
 	public boolean insertImage(Map<Integer, BufferedImage> imagesMap, String imageName, int imageId) {
 		boolean wasInserted = false;
 		
@@ -31,6 +38,10 @@ public class ImageParser {
 		return wasInserted;
 	}
 	
+	/** Creates a map of image identifications mapped to their BufferedImage representation
+	 * @return Map of image identifications mapped to their BufferedImage representation.
+	 * The value null will be returned if one image or more couldn't not be inserted into a new created map.
+	 */
 	Map<Integer, BufferedImage> createImagesMap() {
 		Map<Integer, BufferedImage> imagesMap = new HashMap<Integer, BufferedImage>();
 		boolean wasBackgroundInserted = this.insertImage(imagesMap, "background.png", IdConsts.BACKGROUND);

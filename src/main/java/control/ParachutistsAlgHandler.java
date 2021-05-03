@@ -9,6 +9,10 @@ import data.Plane;
 import globalConstants.SizeConsts;
 import globalConstants.SpeedConsts;
 
+/**
+ * A handler for all algorithm related issues:
+ * Moving the boat, moving the plane and more.
+ */
 public class ParachutistsAlgHandler {
 	
 	public void moveBoatRight(Boat boat) {

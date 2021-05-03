@@ -13,6 +13,9 @@ import data.Plane;
 import data.Sea;
 import globalConstants.SizeConsts;
 
+/**
+ * A wrapper that connects all the library important layers (model, control) together.
+ */
 public class Parachutists {
 
 	private final ParachutistsModel model;

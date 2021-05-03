@@ -28,6 +28,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+/**
+ * A handler for controlling the logic in the Parachutists game.
+ */
 public class ParachutistsController extends JPanel implements GameController {
 	
 	private final ParachutistsModel model;

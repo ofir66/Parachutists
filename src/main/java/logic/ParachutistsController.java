@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,7 +15,6 @@ import data.Background;
 import data.Boat;
 import data.GameStats;
 import data.Parachutist;
-import data.ParachutistsItem;
 import data.ParachutistsModel;
 import data.Plane;
 import data.Sea;
@@ -35,6 +33,7 @@ public class ParachutistsController extends JPanel implements GameController {
 	private final ParachutistsModel model;
 	private boolean isPlaying; 
 	private Timer timer;
+	private final ParachutistsAlgHandler parachutistsAlgHandler;
 	
 	
 	public ParachutistsController(ParachutistsModel model) {
@@ -43,6 +42,7 @@ public class ParachutistsController extends JPanel implements GameController {
 		this.model = model;
 		isPlaying = true;
 		timer = new Timer(SpeedConsts.TIMER_DELAY, null);
+		parachutistsAlgHandler = new ParachutistsAlgHandler();
 		startGame();
 	}
 
@@ -109,37 +109,6 @@ public class ParachutistsController extends JPanel implements GameController {
 		g.dispose();
 	}
 	
-	private void moveBoatRight() {
-		Boat boat = this.model.getBoat();
-		
-		if (boat.getPosX() < SizeConsts.BOAT_RIGHT_LIMIT) {
-			boat.setPosX(boat.getPosX() + SizeConsts.BOAT_STEP_SIZE);
-		}
-	}
-	
-	private void moveBoatLeft() {
-		Boat boat = this.model.getBoat();
-		
-		if (boat.getPosX() > SizeConsts.BOAT_LEFT_LIMIT) {
-			boat.setPosX(boat.getPosX()- SizeConsts.BOAT_STEP_SIZE);
-		}
-	}
-	
-	private void movePlane() {
-		Plane plane = this.model.getPlane();
-		
-		plane.setPosX(plane.getPosX() - SpeedConsts.PLANE_SPEED);
-		if(plane.getPosX() <= 0) {
-			plane.setPosX(SizeConsts.PLANE_RIGHT_LIMIT);
-		}
-	}
-	
-	private void moveParachute() {
-		Parachutist parachutist = this.model.getParachutist();
-		
-		parachutist.setPosY(parachutist.getPosY() + SpeedConsts.PARACHUTE_SPEED);
-	}
-	
 	private void enableKeyListener() {
 		this.addKeyListener(new KeyListener() {
 			
@@ -151,12 +120,12 @@ public class ParachutistsController extends JPanel implements GameController {
 				switch(e.getKeyCode()) {
 					case KeyEvent.VK_LEFT:
 						if (boat.getIsVisible()) {
-							moveBoatLeft();
+							parachutistsAlgHandler.moveBoatLeft(boat);
 						}
 						break;
 					case KeyEvent.VK_RIGHT:
 						if (boat.getIsVisible()) {
-							moveBoatRight();
+							parachutistsAlgHandler.moveBoatRight(boat);
 						}
 						break;
 					case KeyEvent.VK_ENTER:
@@ -174,13 +143,6 @@ public class ParachutistsController extends JPanel implements GameController {
 		});
 	}
 	
-	private boolean areIntersecting(ParachutistsItem a, ParachutistsItem b) {
-		Rectangle aRect = new Rectangle(a.getPosX(), a.getPosY(), a.getWidth(), a.getHeight());
-		Rectangle bRect = new Rectangle(b.getPosX(), b.getPosY(), b.getWidth(), b.getHeight());
-		
-		return aRect.intersects(bRect);
-	}
-	
 	private void enableActionListener() {
 		timer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -195,25 +157,25 @@ public class ParachutistsController extends JPanel implements GameController {
 					boolean isParachutistVisible = parachutist.getIsVisible();
 					
 					if(isParachutistVisible) {
-						moveParachute();
+						parachutistsAlgHandler.moveParachute(parachutist);
 					}
 					
 					if (plane.getIsVisible()) {
-						movePlane();
+						parachutistsAlgHandler.movePlane(plane);
 					}
 					
 					// drop parachutist if plane reached his random position
-					if (!isParachutistVisible && areIntersecting(plane, parachutist)) {
+					if (!isParachutistVisible && parachutistsAlgHandler.areIntersecting(plane, parachutist)) {
 						parachutist.setIsVisible(true);
 					}
-					else if (areIntersecting(boat, parachutist)) {	
+					else if (parachutistsAlgHandler.areIntersecting(boat, parachutist)) {	
 						gameStats.setScore(gameStats.getScore() + 10);
 						parachutist.setIsVisible(false);
 						// new random position for next drop from the plane
 						parachutist.setPosX(SizeConsts.RANDOM.nextInt(SizeConsts.PARACHUTE_RANDOM_BASE));
 						parachutist.setPosY(SizeConsts.PARACHUTE_Y);
 					}
-					else if (areIntersecting(sea, parachutist)){
+					else if (parachutistsAlgHandler.areIntersecting(sea, parachutist)){
 						gameStats.setLives(gameStats.getLives() - 1);
 						parachutist.setIsVisible(false);
 						parachutist.setPosX(SizeConsts.RANDOM.nextInt(SizeConsts.PARACHUTE_RANDOM_BASE));
